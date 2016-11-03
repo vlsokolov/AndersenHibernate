@@ -10,10 +10,6 @@ public abstract class AbstractDao<T> {
 	protected static final SessionFactory factory = new Configuration()
 			.configure("hibernate.cfg.xml")
 			.buildSessionFactory();;	
-			
-	public SessionFactory getSessionFactory(){
-		return factory;
-	}
 	
 	abstract public int create(T o);
 	

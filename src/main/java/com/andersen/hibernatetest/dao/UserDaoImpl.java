@@ -9,10 +9,6 @@ import com.andersen.hibernatetest.entity.User;
 
 public class UserDaoImpl extends AbstractDao<User>{
 	
-	public UserDaoImpl(){
-		getSessionFactory();		
-	}
-	
 	@Override
 	public int create(User user){		
 		Session session = factory.getCurrentSession();

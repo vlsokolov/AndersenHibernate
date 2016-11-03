@@ -13,7 +13,6 @@ public class OrderDaoImpl extends AbstractDao<Order>{
 	private User user;
 		
 	public OrderDaoImpl(User user){
-		getSessionFactory();
 		this.user = user;
 	}	
 	
