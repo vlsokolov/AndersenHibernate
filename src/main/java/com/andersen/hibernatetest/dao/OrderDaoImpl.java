@@ -4,29 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import com.andersen.hibernatetest.entity.Order;
 import com.andersen.hibernatetest.entity.User;
 
-public class OrderDaoImpl {
-	
-	private SessionFactory factory;
+public class OrderDaoImpl extends AbstractDao<Order>{
+		
 	private User user;
 		
 	public OrderDaoImpl(User user){
-		this.factory = getSessionFactory();
+		getSessionFactory();
 		this.user = user;
-	}
+	}	
 	
-	private SessionFactory getSessionFactory(){
-		SessionFactory factory = new Configuration()
-				.configure("hibernate.cfg.xml")
-				.buildSessionFactory();
-		return factory;
-	}
-	
+	@Override
 	public int create(Order order){
 		Session session = factory.getCurrentSession();
 		
@@ -38,6 +29,7 @@ public class OrderDaoImpl {
 		return order.getId();
 	}
 	
+	@Override
 	public void update(Order order){
 		Session session = factory.getCurrentSession();
 		
@@ -50,6 +42,7 @@ public class OrderDaoImpl {
 		session.getTransaction().commit();		
 	}
 	
+	@Override
 	public void delete(Order order){
 		Session session = factory.getCurrentSession();
 		
@@ -58,6 +51,7 @@ public class OrderDaoImpl {
 		session.getTransaction().commit();		
 	}
 	
+	@Override
 	public Order getById(int id){
 		Session session = factory.getCurrentSession();
 		Order selectedOrder = new Order();
@@ -69,6 +63,7 @@ public class OrderDaoImpl {
 		return selectedOrder;
 	}
 	
+	@Override
 	public List<Order> getAll(){
 		List<Order> orders = new ArrayList<Order>();
 		Session session = factory.getCurrentSession();

@@ -4,28 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
 
 import com.andersen.hibernatetest.entity.User;
 
-public class UserDaoImpl {
-	
-	private SessionFactory factory;
+public class UserDaoImpl extends AbstractDao<User>{
 	
 	public UserDaoImpl(){
-		this.factory = getSessionFactory();
+		getSessionFactory();		
 	}
 	
-	private SessionFactory getSessionFactory(){
-		SessionFactory factory = new Configuration()
-				.configure("hibernate.cfg.xml")
-				.buildSessionFactory();
-		return factory;		
-	}
-	
-	
+	@Override
 	public int create(User user){		
 		Session session = factory.getCurrentSession();
 		
@@ -36,6 +24,7 @@ public class UserDaoImpl {
 		return user.getId();
 	}
 	
+	@Override
 	public void update(User user){						
 		Session session = factory.getCurrentSession();
 		
@@ -49,6 +38,7 @@ public class UserDaoImpl {
 		session.getTransaction().commit();
 	}
 	
+	@Override
 	public void delete(User user){						
 		Session session = factory.getCurrentSession();
 		
@@ -58,6 +48,7 @@ public class UserDaoImpl {
 		session.getTransaction().commit();
 	}
 	
+	@Override
 	public User getById(int id){
 		Session session = factory.getCurrentSession();
 		User selectedUser = new User();
@@ -69,6 +60,7 @@ public class UserDaoImpl {
 		return selectedUser;
 	}
 	
+	@Override
 	public List<User> getAll(){
 		Session session = factory.getCurrentSession();
 		List<User> users = new ArrayList<User>();
