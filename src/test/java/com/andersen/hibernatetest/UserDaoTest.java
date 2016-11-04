@@ -1,6 +1,8 @@
 package com.andersen.hibernatetest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,19 +10,27 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.andersen.hibernatetest.dao.impl.UserDaoImpl;
 import com.andersen.hibernatetest.model.User;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:spring.xml")
 public class UserDaoTest {
 	
-	UserDaoImpl userDao;
+	@Autowired
+	private UserDaoImpl userDao;
+	
 	User user;
 	int id;
 	
 	@Before
 	public void setUp(){
-	userDao = new UserDaoImpl();
+	//userDao = new UserDaoImpl();
 	user = new User("testfirstname", "testlastname", "testemail");	
 	}
 	

@@ -6,7 +6,7 @@
 
 	<persistence-unit name="testPU" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>com.andersen.springwithhibernate.model.User</class>
+		<class>com.andersen.hibernatetest.model.User</class>
 		<properties>
 		    <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 		</properties>		

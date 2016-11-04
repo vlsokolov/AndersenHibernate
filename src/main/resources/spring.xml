@@ -11,9 +11,10 @@
 
 	<tx:annotation-driven />
 
-	<context:component-scan base-package="com.byteslounge.spring.tx.dao.impl" />
-	<context:component-scan base-package="com.byteslounge.spring.tx.user.impl" />
-
+	<context:component-scan base-package="com.andersen.hibernatetest.dao.impl" />
+	<context:component-scan base-package="com.andersen.hibernatetest.service.impl" />
+	<context:component-scan base-package="com.andersen.hibernatetest.app" />
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />

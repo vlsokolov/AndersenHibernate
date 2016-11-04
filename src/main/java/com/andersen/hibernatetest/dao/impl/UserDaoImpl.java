@@ -1,70 +1,50 @@
 package com.andersen.hibernatetest.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Session;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.andersen.hibernatetest.dao.UserDao;
 import com.andersen.hibernatetest.model.User;
 
-public class UserDaoImpl extends AbstractDao<User>{
+@Repository
+@Transactional
+public class UserDaoImpl implements UserDao{
+			
+	@PersistenceContext
+	private EntityManager entityManager;
 	
-	@Override
 	public int create(User user){		
-		Session session = factory.getCurrentSession();
-		
-		session.beginTransaction();
-		session.save(user);
-		session.getTransaction().commit();
-		
+		entityManager.persist(user);		
 		return user.getId();
 	}
 	
-	@Override
 	public void update(User user){						
-		Session session = factory.getCurrentSession();
-		
-		session.beginTransaction();
-		User updatedUser = session.get(User.class, user.getId());
-		updatedUser.setFirstname(user.getFirstname());
-		updatedUser.setLastname(user.getLastname());
-		updatedUser.setEmail(user.getEmail());
-		
-		session.update(updatedUser);
-		session.getTransaction().commit();
+		entityManager.merge(user);
 	}
 	
-	@Override
-	public void delete(User user){						
-		Session session = factory.getCurrentSession();
-		
-		session.beginTransaction();
-		User deletingUser = session.get(User.class, user.getId());
-		session.delete(deletingUser);
-		session.getTransaction().commit();
+	public void delete(User user){			
+		User deletinguser = entityManager.find(User.class, user.getId());
+		entityManager.remove(deletinguser);
 	}
 	
-	@Override
 	public User getById(int id){
-		Session session = factory.getCurrentSession();
-		User selectedUser = new User();
-		
-		session.beginTransaction();
-		selectedUser = session.get(User.class, id);
-		session.getTransaction().commit();
-		
-		return selectedUser;
+		return entityManager.find(User.class, id);		
 	}
 	
-	@Override
 	public List<User> getAll(){
-		Session session = factory.getCurrentSession();
-		List<User> users = new ArrayList<User>();
-		
-		session.beginTransaction();
-		users = session.createQuery("from " + User.class.getName()).list();
-		session.getTransaction().commit();
-		return users;
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+	    CriteriaQuery<User> cq = builder.createQuery(User.class);
+	    Root<User> root = cq.from(User.class);
+	    cq.select(root);
+	    return entityManager.createQuery(cq).getResultList();
 	}
 
 }
