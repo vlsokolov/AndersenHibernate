@@ -1,4 +1,4 @@
-package com.andersen.hibernatetest.entity;
+package com.andersen.hibernatetest.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,8 +28,7 @@ public class Order {
 	public Order(){		
 	}
 	
-	public Order(int id, int count){
-		this.id = id;
+	public Order(int count){
 		this.count = count;		
 	}
 

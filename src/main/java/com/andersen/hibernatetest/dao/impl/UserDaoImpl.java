@@ -1,11 +1,11 @@
-package com.andersen.hibernatetest.dao;
+package com.andersen.hibernatetest.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 
-import com.andersen.hibernatetest.entity.User;
+import com.andersen.hibernatetest.model.User;
 
 public class UserDaoImpl extends AbstractDao<User>{
 	

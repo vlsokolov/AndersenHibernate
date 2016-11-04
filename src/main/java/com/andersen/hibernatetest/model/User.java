@@ -1,4 +1,4 @@
-package com.andersen.hibernatetest.entity;
+package com.andersen.hibernatetest.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

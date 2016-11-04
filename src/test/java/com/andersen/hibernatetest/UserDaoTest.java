@@ -9,8 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.andersen.hibernatetest.dao.UserDaoImpl;
-import com.andersen.hibernatetest.entity.User;
+import com.andersen.hibernatetest.dao.impl.UserDaoImpl;
+import com.andersen.hibernatetest.model.User;
 
 public class UserDaoTest {
 	

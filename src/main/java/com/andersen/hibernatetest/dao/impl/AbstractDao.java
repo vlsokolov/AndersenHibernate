@@ -1,4 +1,4 @@
-package com.andersen.hibernatetest.dao;
+package com.andersen.hibernatetest.dao.impl;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public abstract class AbstractDao<T> {
 	
 	protected static final SessionFactory factory = new Configuration()
 			.configure("hibernate.cfg.xml")
-			.buildSessionFactory();;	
+			.buildSessionFactory();	
 	
 	abstract public int create(T o);
 	

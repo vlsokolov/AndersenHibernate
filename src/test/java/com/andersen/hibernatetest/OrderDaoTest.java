@@ -11,10 +11,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.andersen.hibernatetest.dao.OrderDaoImpl;
-import com.andersen.hibernatetest.dao.UserDaoImpl;
-import com.andersen.hibernatetest.entity.Order;
-import com.andersen.hibernatetest.entity.User;
+import com.andersen.hibernatetest.dao.impl.OrderDaoImpl;
+import com.andersen.hibernatetest.dao.impl.UserDaoImpl;
+import com.andersen.hibernatetest.model.Order;
+import com.andersen.hibernatetest.model.User;
 
 public class OrderDaoTest {
 	
