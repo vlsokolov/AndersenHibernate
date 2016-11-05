@@ -1,8 +1,6 @@
 package com.andersen.hibernatetest.service.impl;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.andersen.hibernatetest.dao.OrderDao;
 import com.andersen.hibernatetest.dao.UserDao;
 import com.andersen.hibernatetest.model.Order;
+import com.andersen.hibernatetest.model.User;
 import com.andersen.hibernatetest.service.OrderService;
 
 @Service
@@ -42,35 +41,20 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	public void getMostValuableUser(){		
-			
-		List<Order> orders = orderDao.getAll();	
-		int foundUserId = findUserWithMaxNumberOfOrders(orders);
-		System.out.println(userDao.getById(foundUserId));
-	}
-
-	private static int findUserWithMaxNumberOfOrders(List<Order> orders){
+	
+		List<User> users = userDao.getAll();
+		
 		int max = 0;
-		int temp = 0;
-		int userId = 0;
+		int index = 0;
 		
-		Set<Integer> usersId = new HashSet<Integer>();
-		for(Order order: orders){
-			usersId.add(order.getUser().getId());		
-		}		
+		for(User user: users){
+			if(user.getOrders().size() > max){
+				max = user.getOrders().size();
+				index = users.indexOf(user);
+			}
+				
+		}
 		
-		for(Integer index: usersId){			
-			temp = 0;
-			for(Order order: orders){
-				if(order.getUser().getId() == index){
-					temp++;
-				}				
-			}	
-			if(temp > max){
-				max = temp;	
-				userId = index;
-			}										
-		}		
-		return userId;
+		System.out.println(users.get(index));
 	}
-
 }

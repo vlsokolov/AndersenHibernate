@@ -1,10 +1,15 @@
 package com.andersen.hibernatetest.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +30,9 @@ public class User {
 	@Column(name="email")
 	private String email;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Order> orders = new HashSet<Order>();
+		
 	public User(){		
 	}
 	
@@ -71,6 +79,14 @@ public class User {
 		this.email = email;
 	}
 
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+	
 	@Override
 	public String toString() {
 		if(email != null){

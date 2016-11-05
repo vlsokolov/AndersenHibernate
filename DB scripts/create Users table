@@ -1,7 +1,15 @@
 CREATE TABLE `users` (
+  
   `id` int(11) NOT NULL AUTO_INCREMENT,
+
   `first_name` varchar(45) NOT NULL,
+
   `last_name` varchar(45) NOT NULL,
+ 
   `email` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+
+  PRIMARY KEY (`id`),
+  
+  CONSTRAINT `ordercount` FOREIGN KEY (`id`) REFERENCES `orders` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
